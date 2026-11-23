@@ -1,0 +1,33 @@
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>{{siteName}}</h3>
+          <p>
+            Organized by <strong>{{organization.name}}</strong>{{#if hasPartners}} in partnership with <strong>{{partnerNames}}</strong>{{/if}}.
+          </p>
+        </div>
+        <div>
+          <h3>Get involved</h3>
+          <ul>
+            <li><a href="/nominate">Add kids to Santa's list</a></li>
+            <li><a href="/volunteer">Give or volunteer</a></li>
+            <li><a href="/#drop-off">Drop-off locations</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul>
+            {{#if contact.email}}<li><a href="mailto:{{contact.email}}">{{contact.email}}</a></li>{{/if}}
+            {{#if contact.phone}}<li><a href="tel:{{phoneHref}}">{{contact.phone}}</a></li>{{/if}}
+            {{#if contact.facebookUrl}}<li><a href="{{contact.facebookUrl}}" rel="noopener">Facebook</a></li>{{/if}}
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; {{year}} {{organization.name}} &middot; {{location}}
+      </div>
+    </div>
+  </footer>
+
+  <script src="/site.js"></script>

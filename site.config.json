@@ -1,0 +1,55 @@
+{
+  "siteName": "Soda Springs Christmas Toy Drive",
+  "shortName": "Soda Springs Toy Drive",
+  "location": "Caribou County, ID",
+  "year": "2026",
+  "description": "A community Christmas gift drive for kids in Caribou County, ID. Add your kids to Santa's list, or sign up to give.",
+
+  "hero": {
+    "headline": "Santa's list is open for every kid in our valley.",
+    "lead": "Neighbors across Caribou County are teaming up to put something special under every tree this year. Add your kids to Santa's list, add a family you love, or join in as a giver or volunteer."
+  },
+
+  "organization": {
+    "name": "Fool Throttle Foundation",
+    "url": "",
+    "description": "Fool Throttle Foundation is the nonprofit organizing this year's toy drive. We coordinate Santa's list, volunteers and donations so every gift goes straight to a kid in our area.",
+    "taxNote": "Our application for 501(c)(3) status is pending, so we can't provide tax-deduction receipts at this time."
+  },
+
+  "partners": [
+    {
+      "name": "Stockman's Bar",
+      "role": "Community Partner",
+      "url": "",
+      "description": "Stockman's Bar in Soda Springs is proudly partnering with us to collect toys and rally the community. Stop by to drop off a gift and say thanks!"
+    }
+  ],
+
+  "dates": {
+    "nominationDeadline": "Friday, December 11",
+    "donationDeadline": "Friday, December 18",
+    "distributionDate": "Saturday, December 19"
+  },
+
+  "contact": {
+    "email": "toydrive@foolthrottlefoundation.com",
+    "phone": "",
+    "facebookUrl": ""
+  },
+
+  "serviceArea": "Caribou County, ID",
+  "towns": ["Soda Springs", "Grace", "Bancroft", "Georgetown", "Lund", "Chesterfield", "Henry", "Wayan", "Conda"],
+
+  "dropOffLocations": [
+    { "name": "Stockman's Bar", "address": "96 S Main Street, Soda Springs, ID 83276", "hours": "10am to about midnight" }
+  ],
+
+  "theme": {
+    "primary": "#b3202a",
+    "primaryDark": "#8a161e",
+    "secondary": "#1f5b3a",
+    "secondaryDark": "#143d27",
+    "accent": "#d9a43b"
+  }
+}

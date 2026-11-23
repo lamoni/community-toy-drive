@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+  <title>{{siteName}} | {{presentedBy}}</title>
+  <meta name="description" content="{{description}}">
+</head>
+<body>
+{{> header}}
+
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Christmas {{year}} &middot; {{location}}</p>
+        <h1>{{hero.headline}}</h1>
+        <p class="lead">{{hero.lead}}</p>
+        <div class="hero-actions">
+          <a class="btn btn-red" href="/nominate">Add kids to Santa's list</a>
+          <a class="btn btn-outline" href="/volunteer">Give or volunteer</a>
+        </div>
+        <p class="hero-presenters">
+          Brought to you by <strong>{{organization.name}}</strong>{{#if hasPartners}} in partnership with <strong>{{partnerNames}}</strong>{{/if}}
+        </p>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="dates">
+        <div class="date-card">
+          <div class="label">Santa's list closes</div>
+          <div class="value">{{dates.nominationDeadline}}</div>
+        </div>
+        <div class="date-card">
+          <div class="label">Toy donations due</div>
+          <div class="value">{{dates.donationDeadline}}</div>
+        </div>
+        <div class="date-card">
+          <div class="label">Gifts delivered</div>
+          <div class="value">{{dates.distributionDate}}</div>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="container">
+        <div class="cards">
+          <div class="card">
+            <div class="icon">🎄</div>
+            <h3>Add your kids to Santa's list</h3>
+            <p>
+              Any family in our area can add their kids. Tell us their ages and what they love, and Santa's helpers
+              take care of the rest. You can add a friend's, neighbor's or relative's family too. Everything you share is kept private.
+            </p>
+            <a class="btn btn-red" href="/nominate">Add to Santa's list</a>
+          </div>
+          <div class="card">
+            <div class="icon">🧸</div>
+            <h3>Want to give?</h3>
+            <p>
+              Drop off new, unwrapped toys, or sponsor a family's whole Christmas list.
+              Every gift stays right here in our community.
+            </p>
+            <a class="btn btn-green" href="/volunteer">Sign up to donate</a>
+          </div>
+          <div class="card">
+            <div class="icon">🦌</div>
+            <h3>Want to volunteer?</h3>
+            <p>
+              We need elves! Help sort and wrap gifts, or help Santa's sleigh by delivering presents to families
+              around the area.
+            </p>
+            <a class="btn btn-green" href="/volunteer">Volunteer with us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt" id="how-it-works">
+      <div class="container">
+        <h2 class="text-center">How it works</h2>
+        <p class="section-intro center text-center">Simple, private, and local, from wish list to Christmas morning.</p>
+        <ol class="steps">
+          <li>
+            <h3>Add to the list</h3>
+            <p class="muted">A parent, grandparent, or friend of the family fills out a short form with each child's age, sizes and wish list.</p>
+          </li>
+          <li>
+            <h3>We say hello</h3>
+            <p class="muted">A friendly volunteer reaches out to the parent or guardian if we need clarification on any of the suggested gifts or hobbies for a child.</p>
+          </li>
+          <li>
+            <h3>Santa's helpers get to work</h3>
+            <p class="muted">Neighbors pick out gifts or drop off toys. Volunteers sort, match and wrap a gift for each child.</p>
+          </li>
+          <li>
+            <h3>Gifts are delivered</h3>
+            <p class="muted">Gifts are delivered or picked up before Christmas, ready to go under the tree.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="drop-off">
+      <div class="container">
+        <div class="split">
+          <div>
+            <h2>Drop off a toy</h2>
+            <p>
+              Bring <strong>new, unwrapped</strong> toys to any of our drop-off locations by
+              <strong>{{dates.donationDeadline}}</strong>. We especially need gifts for
+              <strong>teens (ages 12&ndash;17)</strong> and <strong>babies</strong>: think gift cards, books, games,
+              art supplies, sports gear, and warm hats &amp; gloves.
+            </p>
+          </div>
+          <ul class="list-plain">
+            {{#each dropOffLocations}}
+            <li>
+              <strong>{{this.name}}</strong><br>
+              {{this.address}}<br>
+              <span class="muted">{{this.hours}}</span>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt" id="about">
+      <div class="container">
+        <h2 class="text-center">Who we are</h2>
+        <p class="section-intro center text-center">A local effort, run by local people, for local kids.</p>
+        <div class="partners">
+          <div class="partner">
+            <div class="role">Organizer</div>
+            <h3>{{#if organization.url}}<a href="{{organization.url}}" rel="noopener">{{organization.name}}</a>{{else}}{{organization.name}}{{/if}}</h3>
+            <p>{{organization.description}}</p>
+          </div>
+          {{#each partners}}
+          <div class="partner">
+            <div class="role">{{this.role}}</div>
+            <h3>{{#if this.url}}<a href="{{this.url}}" rel="noopener">{{this.name}}</a>{{else}}{{this.name}}{{/if}}</h3>
+            <p>{{this.description}}</p>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="narrow text-center">
+        <h2>Serving all of {{serviceArea}}</h2>
+        <p class="muted">Live just outside the area? Add your kids anyway. We'd love to include them.</p>
+      </div>
+    </section>
+
+    <section class="section-alt" id="faq">
+      <div class="narrow">
+        <h2 class="text-center">Questions</h2>
+        <details>
+          <summary>Who can be on Santa's list?</summary>
+          <p>Kids ages 0&ndash;17 living in {{serviceArea}}. Just add them to the list.</p>
+        </details>
+        <details>
+          <summary>Can I add my own kids?</summary>
+          <p>Of course! Just choose "My own kids" on the <a href="/nominate">Santa's list form</a>.</p>
+        </details>
+        <details>
+          <summary>Is my information kept private?</summary>
+          <p>Yes. What you share is only seen by the small group of {{organization.name}} volunteers coordinating gifts, and is never shared publicly or sold.</p>
+        </details>
+        <details>
+          <summary>What kinds of toys should I donate?</summary>
+          <p>New, unwrapped toys for any age. Gifts for teens and babies are always the hardest to find, so those are especially appreciated. Please no toy weapons.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+{{> footer}}
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin | {{siteName}}</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body { background: #f4f1ea; }
+    .admin-bar { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between; margin: 1.5rem 0; }
+    .tabs { display: flex; gap: 0.5rem; }
+    .tab { padding: 0.55rem 1.1rem; border-radius: 999px; border: 1.5px solid var(--line); background: var(--white); cursor: pointer; font: inherit; font-weight: 600; color: var(--green-dark); }
+    .tab[aria-selected="true"] { background: var(--green); color: var(--white); border-color: var(--green); }
+    .tools { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+    .tools input, .tools select { width: auto; padding: 0.5rem 0.75rem; }
+    .stats { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .stat { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 0.6rem 1rem; font-size: 0.9rem; }
+    .stat strong { font-size: 1.2rem; color: var(--green-dark); margin-right: 0.25rem; }
+    .entry { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+    .entry-head { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; margin-bottom: 0.5rem; }
+    .entry-head h3 { margin: 0; }
+    .meta { font-size: 0.85rem; color: var(--muted); }
+    .kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.25rem 1.5rem; font-size: 0.95rem; margin: 0.5rem 0; }
+    .kv div span { color: var(--muted); }
+    table.kids { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.75rem 0; }
+    table.kids th, table.kids td { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    table.kids th { background: var(--cream); }
+    .entry-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: flex-start; margin-top: 0.75rem; }
+    .entry-actions select { width: auto; padding: 0.4rem 0.6rem; }
+    .entry-actions textarea { min-height: 40px; flex: 1; min-width: 220px; font-size: 0.9rem; padding: 0.45rem 0.6rem; }
+    .pill { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.8rem; background: var(--cream); border: 1px solid var(--line); margin-right: 0.25rem; }
+    .status-new { background: #fff1d6; border-color: #f0d495; }
+    .empty { text-align: center; padding: 3rem; color: var(--muted); }
+    .saved { color: var(--green); font-size: 0.85rem; }
+    .scroll-x { overflow-x: auto; }
+    .age-breakdown { flex-basis: 100%; margin: 0; }
+    .age-breakdown tr.totals td { font-weight: 700; border-top: 2px solid var(--line); }
+    .age-breakdown td.need { color: var(--red); font-weight: 700; }
+    .stat-alert { border-color: #f3b9b9; background: #fdecec; }
+    .stat-alert strong { color: var(--red); }
+    .stat-good { border-color: #b7dcc4; background: #eef7f1; }
+    .stat-muted { opacity: 0.8; }
+    .filter-check { display: flex; align-items: center; gap: 0.4rem; font-weight: 600; margin: 0; white-space: nowrap; }
+    .filter-check input { accent-color: var(--green); width: 1.05rem; height: 1.05rem; }
+    table.kids select { width: auto; padding: 0.3rem 0.4rem; font-size: 0.85rem; }
+    table.kids input.gift-notes { padding: 0.3rem 0.5rem; font-size: 0.85rem; min-width: 150px; }
+    table.kids tr.gift-needed td:first-child { box-shadow: inset 4px 0 0 var(--red); }
+    table.kids tr.gift-assigned td:first-child, table.kids tr.gift-purchased td:first-child { box-shadow: inset 4px 0 0 var(--gold); }
+    table.kids tr.gift-wrapped td:first-child, table.kids tr.gift-delivered td:first-child { box-shadow: inset 4px 0 0 var(--green); }
+    .gift-pill-needed { background: #fdecec; border-color: #f3b9b9; color: var(--red-dark); }
+    .gift-pill-ok { background: #fff6e0; border-color: #efd9a3; }
+    .gift-pill-done { background: #eef7f1; border-color: #b7dcc4; color: var(--green-dark); }
+    .age-breakdown table.kids td:not(:first-child), .age-breakdown table.kids th:not(:first-child) { text-align: center; }
+    .summary-note, .summary-status { max-width: 46rem; }
+    .summary-note { color: var(--muted); margin-top: 0; }
+    .summary-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin: 1rem 0 1.5rem; }
+    .summary-text { white-space: pre-wrap; font: inherit; background: var(--cream); border: 1px solid var(--line); border-radius: 10px; padding: 0.9rem 1rem; margin: 0.75rem 0 0; }
+    .summary-block { margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/admin">
+        <span class="brand-name">🎁 Toy Drive Admin</span>
+        <span class="brand-sub">{{orgName}}</span>
+      </a>
+      <nav class="site-nav" style="display:flex; position:static; flex-direction:row; padding:0; border:0">
+        <a href="/" target="_blank">View site ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding-bottom:3rem">
+    <div class="admin-bar">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-tab="nominations" aria-selected="true">Toy requests</button>
+        <button class="tab" role="tab" data-tab="signups" aria-selected="false">Donors &amp; volunteers</button>
+        <button class="tab" role="tab" data-tab="summaries" aria-selected="false">Season summary</button>
+      </div>
+      <div class="tools" id="tools">
+        <input type="search" id="search" placeholder="Search…">
+        <select id="status-filter"><option value="">All statuses</option></select>
+        <label class="filter-check"><input type="checkbox" id="needs-gift"> Kids still need gifts</label>
+        <a class="btn btn-ghost" id="export" href="#" style="padding:0.5rem 1rem">Export CSV</a>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div id="list"></div>
+  </main>
+
+  <script src="/admin/admin.js"></script>
+</body>
+</html>

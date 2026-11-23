@@ -1,0 +1,17 @@
+# Copy to terraform.tfvars and fill in. terraform.tfvars is git-ignored.
+
+project_name   = "my-town-toy-drive"
+aws_region     = "us-east-1"
+admin_password = "use-a-long-random-password-here"
+
+# Optional custom domain. Either use an existing Route 53 zone...
+# domain_name     = "sodaspringstoydrive.org"
+# route53_zone_id = "Z0123456789ABCDEFGHIJ"
+# ...or, if the domain is registered elsewhere (Namecheap, GoDaddy...), create a zone and
+# point the registrar's nameservers at the `nameservers` output:
+# create_route53_zone = true
+
+# Optional email for your domain, e.g. free forwarding with ImprovMX:
+# mx_records   = ["10 mx1.improvmx.com", "20 mx2.improvmx.com"]
+# txt_records  = ["v=spf1 include:spf.improvmx.com ~all"]
+# dmarc_record = "v=DMARC1; p=none;"

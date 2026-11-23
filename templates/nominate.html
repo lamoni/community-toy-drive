@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+  <title>Santa's List | {{siteName}}</title>
+  <meta name="description" content="Add your kids, or a family you love, to Santa's list in the {{location}} area.">
+</head>
+<body>
+{{> header}}
+
+  <main id="main">
+    <div class="page-hero">
+      <div class="container">
+        <h1>Add kids to Santa's list</h1>
+        <p>For your own kids or a family you love. The list closes <strong>{{dates.nominationDeadline}}</strong>.</p>
+      </div>
+    </div>
+
+    <section class="pt-0">
+      <div class="narrow">
+        <form class="form-card" id="nominate-form">
+          <div class="callout">
+            🔒 Everything you share is kept private and only seen by the {{organization.name}} volunteers coordinating gifts.
+          </div>
+
+          <fieldset>
+            <legend>Whose kids are you adding?</legend>
+            <div class="choice-group">
+              <label class="choice">
+                <input type="radio" name="submitted_by" value="self" checked>
+                <span>My own kids<small>I'm their parent or guardian.</small></span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="submitted_by" value="other">
+                <span>Another family's kids<small>A friend, neighbor, relative, student or coworker.</small></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset id="nominator-fields" hidden>
+            <legend>About you</legend>
+            <div class="grid-2">
+              <div class="field">
+                <label for="nominator_name">Your name <span class="req">*</span></label>
+                <input type="text" id="nominator_name" name="nominator_name" autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="relationship">How do you know the family?</label>
+                <input type="text" id="relationship" name="relationship" placeholder="Neighbor, teacher, church, etc.">
+              </div>
+              <div class="field">
+                <label for="nominator_phone">Your phone</label>
+                <input type="tel" id="nominator_phone" name="nominator_phone" autocomplete="tel" placeholder="(555) 123-4567">
+              </div>
+              <div class="field">
+                <label for="nominator_email">Your email</label>
+                <input type="email" id="nominator_email" name="nominator_email" autocomplete="email">
+              </div>
+            </div>
+            <p class="hint">Please give us at least a phone number or email in case we have questions.</p>
+          </fieldset>
+
+          <fieldset>
+            <legend id="guardian-heading">Your information</legend>
+            <div class="grid-2">
+              <div class="field">
+                <label for="guardian_name">Parent/guardian name <span class="req">*</span></label>
+                <input type="text" id="guardian_name" name="guardian_name" required>
+              </div>
+              <div class="field">
+                <label for="guardian_phone">Parent/guardian phone <span class="req">*</span></label>
+                <input type="tel" id="guardian_phone" name="guardian_phone" placeholder="(555) 123-4567" required>
+              </div>
+              <div class="field">
+                <label for="guardian_email">Parent/guardian email</label>
+                <input type="email" id="guardian_email" name="guardian_email">
+              </div>
+            </div>
+            <div class="field">
+              <label for="address">Full home address <span class="req">*</span></label>
+              <input type="text" id="address" name="address" required placeholder="123 Main St, Grace, ID 83241">
+              <span class="hint">Include the street, city, and ZIP. We use this to deliver the gifts.</span>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Children</legend>
+            <p class="hint children-hint">Add each child (ages 0&ndash;17) in the household. First names only. Ages and sizes help us pick the right gifts.</p>
+            <div id="children"></div>
+            <button type="button" class="btn btn-ghost" id="add-child">+ Add another child</button>
+          </fieldset>
+
+          <fieldset>
+            <legend>Anything else?</legend>
+            <div class="field">
+              <label for="notes">Notes</label>
+              <textarea id="notes" name="notes" placeholder="Allergies, favorite colors, best time to reach you, anything else Santa's helpers should know"></textarea>
+            </div>
+            <label class="choice">
+              <input type="checkbox" name="consent" required>
+              <span id="consent-text">It's OK for a volunteer to contact me about Santa's list.</span>
+            </label>
+          </fieldset>
+
+          <div class="hp" aria-hidden="true">
+            <label for="website">Leave this empty</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="form-error" role="alert" hidden></div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-red">Add to Santa's list</button>
+          </div>
+
+          <p class="privacy-note">
+            Questions? Contact us at <a href="mailto:{{contact.email}}">{{contact.email}}</a>{{#if contact.phone}} or <a href="tel:{{phoneHref}}">{{contact.phone}}</a>{{/if}}.
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <template id="child-template">
+    <div class="child-card">
+      <div class="child-card-header">
+        <h3>Child <span class="child-number">1</span></h3>
+        <button type="button" class="link-btn remove-child">Remove</button>
+      </div>
+      <div class="grid-3">
+        <div class="field">
+          <label>First name <span class="req">*</span></label>
+          <input type="text" data-field="first_name" required>
+        </div>
+        <div class="field">
+          <label>Age <span class="req">*</span></label>
+          <input type="number" data-field="age" min="0" max="17" step="1" required placeholder="0-17">
+          <span class="hint">Age on Christmas Day. Use 0 for babies under 1.</span>
+        </div>
+        <div class="field">
+          <label>Boy or girl <span class="req">*</span></label>
+          <select data-field="gender" required>
+            <option value="">Choose…</option>
+            <option>Boy</option>
+            <option>Girl</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Clothing size</label>
+          <input type="text" data-field="clothing_size" placeholder="e.g. Youth M, 4T">
+        </div>
+        <div class="field">
+          <label>Shoe size</label>
+          <input type="text" data-field="shoe_size">
+        </div>
+      </div>
+      <div class="field">
+        <label>Wish list &amp; interests</label>
+        <textarea data-field="wishes" placeholder="Favorite toys, hobbies, colors, characters, things they need…"></textarea>
+      </div>
+    </div>
+  </template>
+
+{{> footer}}
+</body>
+</html>

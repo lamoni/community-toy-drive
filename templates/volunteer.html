@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+  <title>Donate or Volunteer | {{siteName}}</title>
+  <meta name="description" content="Donate toys, sponsor a family, or volunteer with the {{siteName}}.">
+</head>
+<body>
+{{> header}}
+
+  <main id="main">
+    <div class="page-hero">
+      <div class="container">
+        <h1>Donate or volunteer</h1>
+        <p>Sign up and a {{organization.name}} coordinator will get in touch. Just want to drop off a toy? Bring it to one of our <a href="/#drop-off">drop-off locations</a>, no sign-up needed.</p>
+      </div>
+    </div>
+
+    <section class="pt-0">
+      <div class="narrow">
+        <form class="form-card" id="signup-form">
+          {{#if organization.taxNote}}
+          <p class="tax-note">{{organization.taxNote}}</p>
+          {{/if}}
+          <fieldset>
+            <legend>How would you like to help? <span class="req">*</span></legend>
+            <div class="choice-group">
+              <label class="choice">
+                <input type="checkbox" name="roles" value="sponsor-family">
+                <span>Sponsor a family<small>We'll match you with a family's wish list to shop for.</small></span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="roles" value="donate-toys">
+                <span>Donate toys<small>New, unwrapped toys dropped off at a collection site.</small></span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="roles" value="wrap">
+                <span>Sort &amp; wrap gifts<small>Help at our wrapping nights in December.</small></span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="roles" value="deliver">
+                <span>Deliver gifts<small>Drive gifts to families around the area.</small></span>
+              </label>
+            </div>
+            <div class="field sponsor-count" id="sponsor-count" hidden>
+              <label for="families_to_sponsor">How many families?</label>
+              <input type="number" id="families_to_sponsor" name="families_to_sponsor" min="1" max="50" value="1">
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Your information</legend>
+            <div class="grid-2">
+              <div class="field">
+                <label for="name">Name <span class="req">*</span></label>
+                <input type="text" id="name" name="name" required autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="organization">Business or group</label>
+                <input type="text" id="organization" name="organization" placeholder="Optional">
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email">
+              </div>
+              <div class="field">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(555) 123-4567">
+              </div>
+            </div>
+            <p class="hint">Please give us at least an email or phone number so we can reach you.</p>
+            <div class="field">
+              <label for="notes">Notes</label>
+              <textarea id="notes" name="notes" placeholder="Availability, questions, anything we should know…"></textarea>
+            </div>
+          </fieldset>
+
+          <div class="hp" aria-hidden="true">
+            <label for="website">Leave this empty</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="form-error" role="alert" hidden></div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-green">Sign me up</button>
+          </div>
+
+          <p class="privacy-note">
+            Questions? Contact us at <a href="mailto:{{contact.email}}">{{contact.email}}</a>{{#if contact.phone}} or <a href="tel:{{phoneHref}}">{{contact.phone}}</a>{{/if}}.
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+{{> footer}}
+</body>
+</html>
